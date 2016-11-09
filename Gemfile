@@ -27,6 +27,7 @@ group :test do
   gem "capybara"
   gem "capybara-webkit"
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -4,7 +4,12 @@ require 'rails/test_help'
 require "capybara/rails"
 
 class ActiveSupport::TestCase
+  include Capybara::DSL
   self.use_transactional_tests = true
+end
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
 end
 
 module UserTestHelper
