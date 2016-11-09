@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'users/new'
+
+  get 'account_activation', to: 'users#account_activation'
+  get 'password_reset', to: 'users#password_reset'
 end

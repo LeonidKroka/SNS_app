@@ -1,6 +1,8 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  include UserTestHelper
+  
   def setup
     @user = User.new( valid_user )
   end
@@ -57,15 +59,6 @@ class UserTest < ActiveSupport::TestCase
         yield valid
         assert @user.valid?
       end
-    end
-
-    def valid_user
-      { name: "Exemple",
-        surname: "Exemple",
-        gender: "Male",
-        email: "true_mail@example.com",
-        password: "True0pass",
-        password_confirmation: "True0pass"}
     end
 
     def user_data
