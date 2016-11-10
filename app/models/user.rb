@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :image, dependent: :destroy
+
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
   attr_accessor :activation_token, :remember_token

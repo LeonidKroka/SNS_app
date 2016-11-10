@@ -2,6 +2,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "capybara/rails"
+require 'database_cleaner'
+DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.clean_with(:truncation)
 
 class ActiveSupport::TestCase
   include Capybara::DSL
