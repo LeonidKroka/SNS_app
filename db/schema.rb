@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110194457) do
+ActiveRecord::Schema.define(version: 20161110203016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,26 @@ ActiveRecord::Schema.define(version: 20161110194457) do
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "like"
+    t.integer  "dislike"
+    t.integer  "estimator_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "image_id"
+    t.integer  "post_id"
+    t.index ["comment_id"], name: "index_ratings_on_comment_id", using: :btree
+    t.index ["estimator_id", "user_id", "comment_id"], name: "index_ratings_on_estimator_id_and_user_id_and_comment_id", unique: true, using: :btree
+    t.index ["estimator_id", "user_id", "image_id"], name: "index_ratings_on_estimator_id_and_user_id_and_image_id", unique: true, using: :btree
+    t.index ["estimator_id", "user_id", "post_id"], name: "index_ratings_on_estimator_id_and_user_id_and_post_id", unique: true, using: :btree
+    t.index ["estimator_id"], name: "index_ratings_on_estimator_id", using: :btree
+    t.index ["image_id"], name: "index_ratings_on_image_id", using: :btree
+    t.index ["post_id"], name: "index_ratings_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "surname"
@@ -89,4 +109,8 @@ ActiveRecord::Schema.define(version: 20161110194457) do
   add_foreign_key "images", "posts"
   add_foreign_key "images", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "ratings", "comments"
+  add_foreign_key "ratings", "images"
+  add_foreign_key "ratings", "posts"
+  add_foreign_key "ratings", "users"
 end

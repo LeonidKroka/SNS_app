@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :inverse_messages, :class_name => "Message",
            :foreign_key => "receiver_id"
+  has_many :ratings, dependent: :destroy
+  has_many :estimator, :through => :ratings
+  has_many :inverse_ratings, :class_name => "Rating",
+           :foreign_key => "estimator_id", dependent: :destroy
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
