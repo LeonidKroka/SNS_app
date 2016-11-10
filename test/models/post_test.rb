@@ -14,8 +14,8 @@ class PostTest < ActiveSupport::TestCase
 
   def test_text_or_image_should_by_presence
     assert Post.new(text: "some text", user_id: @user.id).valid?
-    assert Post.new(user_id: @user.id).images.new( valid_image ).valid?
-    post = Post.new(text: "some text", user_id: @user.id)
+    assert Post.new(user_id: @user.id).invalid?
+    post = Post.new(user_id: @user.id)
     post.images.new( valid_image )
     assert post.valid?
   end

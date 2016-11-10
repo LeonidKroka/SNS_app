@@ -1,6 +1,6 @@
 class Image < ApplicationRecord
   belongs_to :user
-  belongs_to :post
+  has_many :comments, dependent: :destroy
   mount_uploader :image, ImageUploader
 
   validates :image, presence: true
