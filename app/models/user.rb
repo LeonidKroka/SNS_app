@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :inverse_friend_relations, :class_name => "FriendRelation",
            :foreign_key => "friend_id", dependent: :destroy
   has_many :inverse_friends, :through => :inverse_friend_relations, :source => :user
+  has_many :messages
+  has_many :inverse_messages, :class_name => "Message",
+           :foreign_key => "receiver_id"
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
@@ -35,10 +38,6 @@ class User < ApplicationRecord
   def all_friends
     ids = self.friends.map {|men| men.id} + self.inverse_friends.map {|men| men.id}
     User.where('CAST(id AS INT) IN (?)', ids)
-  end
-
-  def kill
-    self.friend_relations+self.inverse_friend_relations
   end
 
   def User.digest(string)

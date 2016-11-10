@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class FriendRelationTest < ActiveSupport::TestCase
+  include UserTestHelper
+  
   def setup
     two_new_user
   end
@@ -42,20 +44,4 @@ class FriendRelationTest < ActiveSupport::TestCase
     assert_equal 0, @friend.all_relations.count
     assert_equal 0, @friend.all_friends.count
   end
-
-  private
-    def two_new_user
-      @user = User.create(name: "Sad",
-                          surname: "Exemple",
-                          gender: "Male",
-                          email: "sad_mail@example.com",
-                          password: "True0pass",
-                          password_confirmation: "True0pass")
-      @friend = User.create(name: "Dark",
-                            surname: "Exemple",
-                            gender: "Male",
-                            email: "dark_mail@example.com",
-                            password: "True0pass",
-                            password_confirmation: "True0pass")
-    end
 end

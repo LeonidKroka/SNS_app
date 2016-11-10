@@ -29,4 +29,19 @@ module UserTestHelper
     { image: File.open("#{Rails.root}/test/fixtures/files/some.jpg"),
       user_id: @user.id }
   end
+
+  def two_new_user
+    @user = User.create(name: "Sad",
+                        surname: "Exemple",
+                        gender: "Male",
+                        email: "sad_mail@example.com",
+                        password: "True0pass",
+                        password_confirmation: "True0pass")
+    @friend = User.create(name: "Dark",
+                          surname: "Exemple",
+                          gender: "Male",
+                          email: "dark_mail@example.com",
+                          password: "True0pass",
+                          password_confirmation: "True0pass")
+  end
 end
