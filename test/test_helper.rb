@@ -22,7 +22,7 @@ module UserTestHelper
       gender: "Male",
       email: "true_mail@example.com",
       password: "True0pass",
-      password_confirmation: "True0pass"}
+      password_confirmation: "True0pass" }
   end
 
   def valid_image

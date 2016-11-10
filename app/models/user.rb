@@ -2,6 +2,11 @@ class User < ApplicationRecord
   has_many :images, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :friend_relations, dependent: :destroy
+  has_many :friends, :through => :friend_relations
+  has_many :inverse_friend_relations, :class_name => "FriendRelation",
+           :foreign_key => "friend_id", dependent: :destroy
+  has_many :inverse_friends, :through => :inverse_friend_relations, :source => :user
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
@@ -22,6 +27,19 @@ class User < ApplicationRecord
                        format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]*\z/,
                                  message: "must include lower, upper letter and num"}
   has_secure_password
+
+  def all_relations
+    FriendRelation.where('CAST(user_id AS text) LIKE ? OR CAST(friend_id AS text) LIKE ?', self.id.to_s, self.id.to_s)
+  end
+
+  def all_friends
+    ids = self.friends.map {|men| men.id} + self.inverse_friends.map {|men| men.id}
+    User.where('CAST(id AS INT) IN (?)', ids)
+  end
+
+  def kill
+    self.friend_relations+self.inverse_friend_relations
+  end
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
