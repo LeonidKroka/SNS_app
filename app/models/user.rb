@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :image, dependent: :destroy
+  has_many :images, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest

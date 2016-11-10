@@ -24,4 +24,9 @@ module UserTestHelper
       password: "True0pass",
       password_confirmation: "True0pass"}
   end
+
+  def valid_image
+    { image: File.open("#{Rails.root}/test/fixtures/files/some.jpg"),
+      user_id: @user.id }
+  end
 end

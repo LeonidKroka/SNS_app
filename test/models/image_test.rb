@@ -35,10 +35,4 @@ class ImageTest < ActiveSupport::TestCase
     assert_equal 150, image[:width]
     assert_equal 250, image[:height]
   end
-
-  private
-    def valid_image
-      { image: File.open("#{Rails.root}/test/fixtures/files/some.jpg"),
-        user_id: @user.id }
-    end
 end
