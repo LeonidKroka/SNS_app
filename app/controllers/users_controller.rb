@@ -10,4 +10,10 @@ class UsersController < ApplicationController
 
   def password_reset
   end
+
+  def search
+  end
+
+  def friends
+  end
 end

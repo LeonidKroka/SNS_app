@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SNSApp</title>
+    <title>Ant-eater | <%= yield(:title) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,28 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+
+    <div class="main-content">
+      <div class="go-up"></div>
+      <div class="content">
+        <div class="menu">
+          <% if logged? %>
+            <%= render 'layouts/menu' %>
+          <% else %>
+            <%= render 'sessions/login' %>
+          <% end %>
+        </div>
+        <div class="yield_pages">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>

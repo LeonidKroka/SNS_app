@@ -13,6 +13,7 @@ end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
+  Capybara.javascript_driver = :webkit
 end
 
 module UserTestHelper
@@ -43,5 +44,16 @@ module UserTestHelper
                           email: "dark_mail@example.com",
                           password: "True0pass",
                           password_confirmation: "True0pass")
+  end
+
+  def log_in_new_user
+    two_new_user
+    visit '/'
+    within('.login-form') do
+      find('#session_email').set(@user.email)
+      find('#session_password').set(@user.password)
+      find(:css, "#session_remember_me").set(true)
+      click_on "Log in"
+    end
   end
 end

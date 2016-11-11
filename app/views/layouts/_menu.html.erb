@@ -1,0 +1,16 @@
+<div class="main-menu">
+  <ul>
+    <%= link_to current_user do %>
+      <li>Profile</li>
+    <% end %>
+    <%= link_to user_messages_path(current_user) do %>
+      <li>Messages</li>
+    <% end %>
+    <%= link_to friends_path(current_user) do %>
+      <li>Friends</li>
+    <% end %>
+    <%= link_to user_images_path(current_user) do %>
+      <li>Gallery</li>
+    <% end %>
+  </ul>
+</div>

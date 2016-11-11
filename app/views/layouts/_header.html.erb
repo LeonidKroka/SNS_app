@@ -1,0 +1,35 @@
+<div class="header">
+  <%= link_to "Ant-eater", root_path, id: "logo" %>
+
+  <% if logged? %>
+    <%= form_for User.new, :url => search_path do |form| %>
+      <%= form.label :title, hidden: :true %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Search" %>
+      <%= button_tag(type: 'submit', hidden: :true) do %>Search!<% end %>
+    <% end %>
+  <% end %>
+
+  <nav>
+    <ul class="header-nav">
+      <% if logged? %>
+        <li class="dropdown">
+          <p>
+            <span><%= current_user.surname %></span>
+            <img src="/assets/setting.png">
+          </p>
+          <div class="dropdown-up"></div>
+          <ul class="dropdown-menu">
+            <%= link_to edit_user_path(current_user), method: :get do %>
+              <li>Edit profile</li>
+            <% end %>
+            <%= link_to logout_path(current_user), method: :delete do %>
+              <li>Log out</li>
+            <% end %>
+          </ul>
+        </li>
+      <% else %>
+        <li class="log-in"><%= link_to "Log in", login_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

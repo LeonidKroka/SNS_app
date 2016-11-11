@@ -1,0 +1,185 @@
+@charset "utf-8";
+
+body { background-color: rgba(170, 221, 174, 0.20); }
+
+div.header {
+   background: url('header.png') repeat-x;
+   border-bottom: 2px groove #ffffff;
+   height: 40px;
+   width: 100%;
+
+   #logo {
+     text-shadow: 1px 1px 2px black, 0 0 1em red;
+     color: white;
+     font-size: 2em;
+     text-decoration: none;
+     margin-left: 200px;
+     cursor: pointer;
+     float: left;
+   }
+
+   form input {
+     background: url('search-field.png') no-repeat;
+     border:none;
+     float: left;
+     height:20px;
+     margin-top: 8px;
+     margin-left: 80px;
+     padding: 1px 0px 1px 30px;
+     width:170px;
+  }
+
+   ul.header-nav {
+     float: right;
+     margin-right: 200px;
+
+     li.log-in {
+       display: inline-block;
+       width: 50px;
+       margin-top: 10px;
+       font-size: 1em;
+
+       a {
+         color: rgba(0, 98, 255, 0.87);
+         text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.85);
+         text-decoration: none;
+       }
+     }
+
+     li.dropdown {
+       width: 90px;
+       height: 20px;
+       margin-top: 3px;
+       padding: 4px 0px 3px 8px;
+       color: rgba(55, 0, 255, 0.84);
+       cursor: pointer;
+
+       span {
+         float: left;
+         padding-top: 3px;
+         padding-right: 5px;
+       }
+
+       img {
+         width: 20px;
+         height: 20px;
+       }
+
+       div.dropdown-up {
+         background: url('up.png') no-repeat;
+         background-size: 100%;
+         display: none;
+         width: 30px;
+         height: 30px;
+         margin-left: 25px;
+         margin-top: -8px;
+       }
+
+       ul {
+        position: absolute;
+        display: none;
+        padding-top: 2px;
+        width: 90px;
+        margin-left: -5px;
+        margin-top: 0px;
+        border: 1px solid #ccc;
+        background-color: rgba(170, 209, 221, 0.24);
+
+        a { text-decoration: none; }
+
+        li {
+          width: 80px;
+          padding: 5px 0px 5px 4px;
+          margin-bottom: 2px;
+          margin-left: 2px;
+          display: block;
+          color: rgba(0, 98, 255, 0.87);
+          background-color: rgba(170, 221, 17, 0.41);
+          border: 1px groove rgba(204, 204, 204, 0.42);
+        }
+
+        li:hover { background-color: rgba(170, 209, 221, 0.86); }
+       }
+     }
+   }
+}
+
+div.main-content {
+  width: 100%;
+  min-height: 100vh;
+  margin-top: -75px;
+  padding-bottom: 32px;
+
+  .go-up {
+    background: url('go-up.png') no-repeat;
+    background-size: 100%;
+    width: 40px;
+    height: 40px;
+    margin-left: 1200px;
+    cursor: pointer;
+    position:absolute;
+    display: none;
+  }
+
+  .content {
+    padding-top: 20px;
+    clear: both;
+    width: 950px;
+    margin: auto;
+
+    .menu {
+      float: left;
+      width: 150px;
+
+    }
+
+    .yield_pages {
+      width: 800px;
+      margin-left: 150px;
+      border: 1px groove rgba(204, 204, 204, 0.42);
+      padding: 10px 10px 10px 10px;
+      background-color: rgba(17, 221, 63, 0.08);
+    }
+  }
+}
+
+div.footer {
+  width: 100%;
+  background: url('footer.png') repeat-x,
+              url('header.png') repeat-x;
+  height: 30px;
+  padding-top: 1px;
+  margin-top: -31px;
+
+  #logo-footer {
+    text-shadow: 1px 1px 2px black, 0 0 1em red;
+    color: white;
+    font-size: 1.4em;
+    text-decoration: none;
+    margin-left: 200px;
+    margin-top: 4px;
+    cursor: pointer;
+    float: left;
+  }
+}
+
+div.main-menu {
+  margin-left: 0px;
+
+  a { text-decoration: none; }
+
+  ul li {
+    display: block;
+    cursor: pointer;
+    width: 110px;
+    color: #000;
+    text-shadow: 1px 1px 9px black, 0 0 20em rgba(255, 0, 0, 0.3);
+    padding: 7px 6px 7px 15px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+  }
+
+  ul li:hover {
+    background: rgba(37, 114, 84, 0.35);
+  }
+}
