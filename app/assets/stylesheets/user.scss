@@ -57,7 +57,8 @@ div.create-user {
     background: rgba(139, 137, 96, 0.14);
   }
 
-  span.click-to-create:hover { background: rgba(205, 220, 57, 0.60); }
+  span.click-to-create:hover { background: rgba(205, 220, 57, 0.80); }
+  span.click-to-create { transition: 2s; }
 
   label {
     width: 100px;

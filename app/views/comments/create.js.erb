@@ -1,0 +1,4 @@
+$("<%= escape_javascript(render(partial: 'users/posts', :locals => {:post => @post, :posts => @posts, :comment => @comment })) %>")
+.replaceAll(".posts");
+$(document).ready(createCommentAction);
+$(document).ready(toCreateCommentAction);

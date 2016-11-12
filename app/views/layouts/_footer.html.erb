@@ -1,3 +1,7 @@
 <div class="footer">
-  <%= link_to "Ant-eater", root_path, method: :get, id: "logo-footer" %>
+  <% if logged? %>
+    <%= link_to "Ant-eater", current_user, method: :get, id: "logo-footer" %>
+  <% else %>
+    <%= link_to "Ant-eater", root_path, method: :get, id: "logo-footer" %>
+  <% end %>
 </div>

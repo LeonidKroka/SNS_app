@@ -1,0 +1,12 @@
+<div class="comment-forms">
+  <%= form_for([@user, @comment], remote: true) do |form| %>
+    <%= form.hidden_field 'post_id', :value => post.id %>
+    <%= form.label :text, hidden: :true %>
+    <%= form.text_area :text, class: "post-create-body-#{post.id}",
+                              placeholder: "Write your new comment",
+                              autofocus: "true" %> <br>
+    <%= button_tag(type: 'submit') do %>
+      Send
+    <% end %>
+  <% end %>
+</div>

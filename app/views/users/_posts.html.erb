@@ -1,0 +1,55 @@
+<div class="posts">
+  <% @posts.each do |post| %>
+    <div class="post" id=<%= "post-#{post.id}" %> >
+      <p class="author"><%= link_to @user.name+' '+@user.surname, @user, method: :get %></p>
+      <p class="date"><%= date_format post.created_at %></p>
+      <hr class="line">
+      <div class="post-content">
+        <p class="post-text"><%= post.text %></p>
+      </div>
+      <% if post_comments(@user, post).count == 0 %>
+        <p class="to-comment" id=<%= "#{post.id}" %> >Comment</p>
+      <% end %>
+      <% if current_user == @user %>
+        <%= link_to "Delete", user_post_path(@user, post), method: :delete, remote: true, class: "edit-post" %>
+        <%= link_to "Edit", edit_user_post_path(@user, post), remote: true, class: "edit-post" %>
+      <% end %>
+    </div>
+
+    <div class="comments">
+      <% post_comments(@user, post).each do |comment| %>
+        <div class="comment" id=<%= "comment-#{comment.id}" %> >
+          <p class="author">
+            <%= link_to (author comment).name+' '+(author comment).surname, (author comment),
+                        method: :get, class: 'author-link' %>
+          </p>
+          <hr class="line">
+          <div class="comment-content">
+            <p class="comment-text"><%= comment.text %></p>
+          </div>
+          <p class="date"><%= date_format comment.created_at %></p>
+          <% if current_user == (author comment) %>
+            <%= link_to "Delete", user_comment_path(current_user, comment),
+                        method: :delete, remote: true, class: "edit-comment" %>
+          <% end %>
+        </div>
+        <hr class="comment-margin">
+      <% end %>
+
+      <hr class="comment-hr">
+
+      <% unless (post_comments(@user, post).count == 0) %>
+        <div class=<%= "to-create-comment-#{post.id}" %> >
+          <button class="new-comment" id=<%= "#{post.id}" %> >Write your new comment</button>
+        </div>
+      <% else %>
+        <style><%= ".create-comment-#{post.id}" %> {display: none;}</style>
+      <% end %>
+      <div class=<%= "create-comment-#{post.id}" %> >
+        <%= render(partial: '/comments/comment_form', :locals => { :post => post, :comment => @comment}) %>
+      </div>
+    </div>
+
+  <% end %>
+  <%= will_paginate @posts %>
+</div>

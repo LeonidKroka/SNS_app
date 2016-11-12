@@ -1,1 +1,70 @@
+<div class="user-show">
+  <div class="profile-static">
+    <% if (get_avatar @user).nil? %>
+      <figure class="default-avatar user-image">
+  			<p><img src="/assets/avatar.jpg"></p>
+  		</figure>
+    <% else %>
+      <figure class="avatar">
+        <p><img src="#{get_avatar @user}"></p>
+      </figure>
+    <% end %>
 
+    <% unless current_user == @user %>
+      <hr>
+
+      <button class="friend-action">Send messadge</button>
+      <% if is_friend? @user %>
+        <%= form_for(:user, url: delete_friend_path, method: :delete) do |form| %>
+          <%= form.hidden_field 'user_id', :value => @user.id %>
+          <button class="friend-action" type="submit">Delete friend</button>
+        <% end %>
+      <% else %>
+        <%= form_for(:friend_relation, url: add_friend_path, method: :post) do |form| %>
+          <%= form.hidden_field 'user_id', :value => @user.id %>
+          <button class="friend-action" type="submit">Add to friends</button>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% unless @friends.all.count == 0 %>
+      <hr>
+
+      <div class="friends">
+        <p class="friends-h1">Friends <%= link_to "see all", friends_path %></p>
+        <% @friends.all.each do |friend| %>
+          <%= link_to friend, method: :get do %>
+            <figure class="pfofile-friend">
+              <p><img src="#{ friend.thumb.path }"></p>
+              <figcaption><%= friend.name %></figcaption>
+            </figure>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="profile-activity">
+    <p class="profile-name"><%= @user.name+' '+@user.surname %></p>
+    <hr>
+    <p class="activity">
+      User's activity:
+      friends <%= @user.all_friends.count %>;
+      posts <%= @user.posts.count %>;
+      images <%= @user.images.count %>;
+      comments <%= @user.comments.count %>.
+    </p>
+    <hr>
+
+    <% if current_user == @user %>
+      <div class="to-create-post"><button class="new-post">Write your new post</button></div>
+      <div class="create-post">
+        <%= render(partial: '/posts/post_form', :locals => {:post => @post}) %>
+      </div>
+      <hr>
+    <% end %>
+
+    <%= render(partial: 'posts', :locals => {:posts => @posts}) %>
+
+  </div>
+</div>

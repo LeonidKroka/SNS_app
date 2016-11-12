@@ -1,5 +1,9 @@
 <div class="header">
-  <%= link_to "Ant-eater", root_path, method: :get, id: "logo" %>
+  <% if logged? %>
+    <%= link_to "Ant-eater", current_user, method: :get, id: "logo" %>
+  <% else %>
+    <%= link_to "Ant-eater", root_path, method: :get, id: "logo" %>
+  <% end %>
 
   <% if logged? %>
     <%= form_for User.new, :url => search_path do |form| %>
