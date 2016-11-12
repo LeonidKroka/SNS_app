@@ -25,7 +25,7 @@ class User < ApplicationRecord
                       length: { in: 3..15 },
                       format: { with: /\A[a-zA-Z]+-{0,1}[a-zA-Z]+\z/ }
   validates :gender, presence: true,
-                     acceptance: { accept: ['Male', 'Female'], message: "Specify your gender" }
+                     acceptance: { accept: ['male', 'female'], message: "Specify your gender" }
   validates :email, presence: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }

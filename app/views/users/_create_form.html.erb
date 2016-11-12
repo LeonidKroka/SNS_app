@@ -1,0 +1,30 @@
+<div class="registration">
+  <%= form_for @user do |form| %>
+    <%= form.label :name, class: "move-down" %>
+    <%= form.text_field :name, placeholder: "Your name" %><br>
+    <%= form.label :surname %>
+    <%= form.text_field :surname, placeholder: "Your surname" %><br>
+    <%= form.radio_button :gender, 'male' %>
+    <%= label :gender_male, 'Male' %>
+    <%= form.radio_button :gender, 'female' %>
+    <%= label :gender_female, 'Female' %><br>
+    <%= form.label :email %>
+    <%= form.text_field :email, placeholder: "Your emale" %><br>
+    <%= form.label :password %>
+    <%= form.password_field :password, placeholder: "Your password" %><br>
+    <%= form.label :password_confirmation, hidden: :true %>
+    <%= form.label :confirm %>
+    <%= form.password_field :password_confirmation, placeholder: "Confirm password" %><br>
+
+    <% if @user.errors.any? %>
+      <ul class="error-msg">
+        <% @user.errors.full_messages.each do |error| %>
+          <li><%= error.capitalize %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>
+      It's ok!
+    <% end %>
+  <% end %>
+</div>

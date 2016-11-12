@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'sessions#new'
+  root 'users#new'
 
   get 'account_activation', to: 'users#account_activation'
   get 'password_reset', to: 'users#password_reset'
