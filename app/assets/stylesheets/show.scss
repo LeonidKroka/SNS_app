@@ -230,6 +230,31 @@ div.user-show {
       border: 1px solid rgba(76, 175, 80, 0.54);
       padding: 5px 5px 20px 5px;
       margin-bottom: 30px;
+
+      .rating {
+        float: right;
+        margin-right: 0px;
+        width: 80px;
+        margin-top: -15px;
+
+        span {
+          font-size: 14px;
+
+          a {
+            font-size: 20px;
+            text-decoration: none;
+            padding: 2px 2px;
+          }
+        }
+
+        .like {
+          color: green;
+        }
+
+        .dislike {
+          color: red;
+        }
+      }
     }
 
     .comments {

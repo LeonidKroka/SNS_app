@@ -2,6 +2,16 @@
   <% @posts.each do |post| %>
     <div class="post" id=<%= "post-#{post.id}" %> >
       <p class="author"><%= link_to @user.name+' '+@user.surname, @user, method: :get %></p>
+      <p class="rating">
+        <span class="like">
+          <%= link_to '+', like_user_post_path(@user, post), method: :post, remote: true %>
+          <span class=<%= "plus-#{post.id}" %>><%= like post %></span>
+        </span> |
+        <span class="dislike">
+          <span class=<%= "minus-#{post.id}" %>><%= dislike post %></span>
+          <%= link_to '-', dislike_user_post_path(@user, post), method: :post, remote: true %>
+        </span>
+      </p>
       <p class="date"><%= date_format post.created_at %></p>
       <hr class="line">
       <% unless post.images.empty? %>

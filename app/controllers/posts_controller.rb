@@ -39,6 +39,26 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
+  def like
+    (@post = Post.find_by(id: params[:id]))
+    .ratings.create(user_id: params[:user_id],
+                    estimator_id: current_user.id,
+                    like: 1)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def dislike
+    (@post = Post.find_by(id: params[:id]))
+    .ratings.create(user_id: params[:user_id],
+                    estimator_id: current_user.id,
+                    dislike: 1)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     def post_params
       params.require(:post).permit(:text)

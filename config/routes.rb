@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :users do
-    resources :posts
+    resources :posts do
+      post "like", on: :member
+      post "dislike", on: :member
+    end
     resources :images
     resources :comments
     resources :messages
