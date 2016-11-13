@@ -1,3 +1,4 @@
+<% provide(:title, 'Profile') %>
 <div class="user-show">
   <div class="profile-static">
     <% if (get_avatar @user).nil? %>
@@ -45,11 +46,11 @@
       <hr>
 
       <div class="friends">
-        <p class="friends-h1">Friends <%= link_to "see all", friends_user_path(@user) %></p>
+        <p class="friends-h1">Friends <%= link_to "see all", friends_user_path(@user), method: :get %></p>
         <% @friends.all.each do |friend| %>
           <%= link_to friend, method: :get do %>
             <figure class="pfofile-friend">
-              <p><img src="#{ friend.thumb.path }"></p>
+              <p><img src=<%= "#{ get_ico friend }" %>></p>
               <figcaption><%= friend.name %></figcaption>
             </figure>
           <% end %>

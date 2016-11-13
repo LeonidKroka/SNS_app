@@ -1,3 +1,4 @@
+<% provide(:title, 'Messages') %>
 <div class="message-folder">
   <% @messages.each do |msg| %>
     <%= link_to (get_user msg), method: :get do %>

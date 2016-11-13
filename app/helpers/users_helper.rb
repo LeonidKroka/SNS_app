@@ -6,6 +6,10 @@ module UsersHelper
     nil
   end
 
+  def get_ico user
+    user.images.order('id DESC').all.each {|img| return img.image.thumb.url if img.avatar}
+  end
+
   def get_nine_friends user
     user.all_friends.count < 10 ? user.all_friends : user.all_friends.limit(9)
   end
