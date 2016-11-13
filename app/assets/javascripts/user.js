@@ -2,6 +2,7 @@ $(document).ready(createPostAction);
 $(document).ready(createCommentAction);
 $(document).ready(toCreateCommentAction);
 $(document).ready(addHeightToProfile);
+$(document).ready(sendMessadge);
 
 function createPostAction () {
   $(".new-post").click(function() {
@@ -52,4 +53,17 @@ function toCreateCommentAction () {
 
 function addHeightToProfile () {
   $(".user-show").css("min-height", 30+$('.profile-static').height());
+}
+
+function sendMessadge () {
+  $(".send-letter").click(function() {
+    $(".send-messadge").css("display", "block");
+    $(".messadge-create-body").focus();
+  });
+
+  $(document).mouseup(function(e) {
+    if (!$(".send-messadge").is(e.target) && $(".send-messadge").has(e.target).length === 0) {
+      $(".send-messadge").css("display", "none");
+    }
+  });
 }

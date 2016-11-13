@@ -10,7 +10,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   def test_get_root_pages
     get root_path
     assert_response :success
-    assert_routing '/', controller: 'sessions', action: 'new'
+    assert_routing '/', controller: 'users', action: 'new'
   end
 
   def test_log_in_with_remember_me
@@ -42,7 +42,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_nil response.cookies['user_id']
     assert_nil response.cookies['remember_token']
     assert_response :redirect
-    assert_routing '/', controller: 'sessions', action: 'new'
+    assert_routing '/', controller: 'users', action: 'new'
   end
 
   def test_log_in_with_wrong_data
@@ -50,7 +50,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
                                                     :password => "something",
                                                     :remember_me => '1'} }
     assert_response :success
-    assert_routing '/', controller: 'sessions', action: 'new'
+    assert_routing '/', controller: 'users', action: 'new'
     assert_nil response.cookies['user_id']
     assert_nil response.cookies['remember_token']
   end

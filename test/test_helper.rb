@@ -20,7 +20,7 @@ module UserTestHelper
   def valid_user
     { name: "Exemple",
       surname: "Exemple",
-      gender: "Male",
+      gender: "male",
       email: "true_mail@example.com",
       password: "True0pass",
       password_confirmation: "True0pass" }
@@ -34,13 +34,13 @@ module UserTestHelper
   def two_new_user
     @user = User.create(name: "Sad",
                         surname: "Exemple",
-                        gender: "Male",
+                        gender: "male",
                         email: "sad_mail@example.com",
                         password: "True0pass",
                         password_confirmation: "True0pass")
     @friend = User.create(name: "Dark",
                           surname: "Exemple",
-                          gender: "Male",
+                          gender: "male",
                           email: "dark_mail@example.com",
                           password: "True0pass",
                           password_confirmation: "True0pass")

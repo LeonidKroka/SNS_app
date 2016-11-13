@@ -29,10 +29,10 @@ class ImageTest < ActiveSupport::TestCase
     assert_equal 60, image[:width]
     assert_equal 60, image[:height]
     image = MiniMagick::Image.open(@img.image.list.path)
-    assert_equal 100, image[:width]
-    assert_equal 100, image[:height]
+    assert_equal 200, image[:width]
+    assert_equal 300, image[:height]
     image = MiniMagick::Image.open(@img.image.avatar.path)
-    assert_equal 150, image[:width]
+    assert_equal 200, image[:width]
     assert_equal 250, image[:height]
   end
 end

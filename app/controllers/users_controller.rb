@@ -33,20 +33,22 @@ class UsersController < ApplicationController
   end
 
   def friends
+    @user = User.find_by(id: params[:id])
+    @friends = @user.all_friends
   end
 
   def create_friend
     relation = FriendRelation.new(friend_relation_params)
     relation.friend_id = current_user.id
     relation.save
-    redirect_to current_user
+    redirect_to(:back)
   end
 
   def destroy_friend
     user = User.find_by(id: params[:user][:user_id])
     relation = current_user.all_relations.find_by(friend_id: user.id)||current_user.all_relations.find_by(user_id: user.id)
     relation.destroy
-    redirect_to current_user
+    redirect_to(:back)
   end
 
   private

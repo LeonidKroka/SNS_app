@@ -2,7 +2,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   include UserTestHelper
-  
+
   def setup
     @user = User.new( valid_user )
   end
@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
                  :invalid => ["", "_Ben_", "a"*20, "Me@name"]},
        :surname => {:valid => ["Black", "Black-White"],
                     :invalid => ["", "_Black_", "a"*20, "Me@surname"]},
-       :gender => {:valid => ["Male", "Female"],
+       :gender => {:valid => ["male", "female"],
                    :invalid => ["", "Somethingelse"]},
        :email => {:valid => ["user@foo.COM", "A_US-ER@f.b.org", "frst.lst@foo.jp", "a+b@baz.cn"],
                   :invalid => ["user@foo,com", "user_at_foo.org", "example.user@foo.foo@bar_baz.com"]},

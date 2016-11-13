@@ -2,18 +2,32 @@
   <div class="profile-static">
     <% if (get_avatar @user).nil? %>
       <figure class="default-avatar user-image">
-  			<p><img src="/assets/avatar.jpg"></p>
+  			<p><img src="/assets/avatar.jpg" class="with" id=<%= @user.id %>></p>
   		</figure>
     <% else %>
       <figure class="avatar">
-        <p><img src="#{get_avatar @user}"></p>
+        <p><img src= <%= "#{get_avatar @user}" %> class="with" id=<%= @user.id %>></p>
       </figure>
     <% end %>
 
     <% unless current_user == @user %>
       <hr>
 
-      <button class="friend-action">Send messadge</button>
+      <button class="friend-action send-letter">Send messadge</button>
+      <div class="send-messadge">
+        <%= form_for(:messadge, :url => user_messages_path(@user), method: :post, remote: true) do |form| %>
+          <%= form.label :text, hidden: :true %>
+          <%= form.text_area :text, class: "messadge-create-body",
+                                    placeholder: "Write your messadge",
+                                    autofocus: "true" %> <br>
+          <hr class="comment-margin">
+          <%= button_tag(type: 'submit') do %>
+            Send
+          <% end %>
+        <% end %>
+        <hr class="comment-margin">
+      </div>
+
       <% if is_friend? @user %>
         <%= form_for(:user, url: delete_friend_path, method: :delete) do |form| %>
           <%= form.hidden_field 'user_id', :value => @user.id %>
@@ -31,7 +45,7 @@
       <hr>
 
       <div class="friends">
-        <p class="friends-h1">Friends <%= link_to "see all", friends_path %></p>
+        <p class="friends-h1">Friends <%= link_to "see all", friends_user_path(@user) %></p>
         <% @friends.all.each do |friend| %>
           <%= link_to friend, method: :get do %>
             <figure class="pfofile-friend">

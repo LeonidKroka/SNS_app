@@ -1,0 +1,16 @@
+<div class="message-folder">
+  <% @messages.each do |msg| %>
+    <%= link_to (get_user msg), method: :get do %>
+      <div class="msg-block">
+        <div class="msg-avatar">
+            <img src= <%= "#{get_avatar (get_user msg)}" %> >
+        </div>
+        <div class="msg-content">
+          <%= link_to (get_user msg).name+' '+(get_user msg).surname, (get_user msg), method: :get %>
+          <p class="msg-date"><%= date_format msg.created_at %></p>
+          <p class="msg-text"><%= msg.text %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

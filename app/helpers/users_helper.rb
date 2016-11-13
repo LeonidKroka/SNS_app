@@ -1,6 +1,8 @@
+require 'uri'
+
 module UsersHelper
   def get_avatar user
-    user.images.order('id DESC').all.each {|img| return img.avatar.path if img.avatar}
+    user.images.order('id DESC').all.each {|img| return img.image.avatar.url if img.avatar}
     nil
   end
 
@@ -16,11 +18,34 @@ module UsersHelper
     strtime.strftime('%B %d, %H:%M:%S')
   end
 
-  def post_comments(user, post)
-    Comment.where('CAST(user_id AS text) LIKE ? AND CAST(post_id AS text) LIKE ?', user.id.to_s, post.id.to_s)
+  def post_comments post
+    Comment.where('CAST(post_id AS text) LIKE ?', post.id.to_s)
   end
 
   def author comment
     User.find_by(id: comment.user_id)
+  end
+
+  def creator post
+    User.find_by(id: post.user_id)
+  end
+
+  def news
+    friend_ids = current_user.friends.map {|men| men.id} + current_user.inverse_friends.map {|men| men.id}
+    Post.where('CAST(user_id AS INT) IN (?)', friend_ids)
+  end
+
+  def new_images
+    friend_ids = current_user.friends.map {|men| men.id} + current_user.inverse_friends.map {|men| men.id}
+    Image.where('CAST(user_id AS INT) IN (?)', friend_ids)
+  end
+
+  def get_utube text
+    url = URI.extract(text)
+    url[0] if !(url.count==0)
+  end
+
+  def get_user msg
+    user = User.find_by(id: msg.user_id)
   end
 end

@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get '/friends', to: 'users#friends'
   resources :users do
     resources :posts
     resources :images
     resources :comments
     resources :messages
+    patch :friends, on: :member
+    get :friends, on: :member
   end
 end

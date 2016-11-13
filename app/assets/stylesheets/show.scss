@@ -6,7 +6,7 @@ div.user-show {
     background: rgba(63, 81, 181, 0.11);
     padding-bottom: 20px;
 
-    figure.default-avatar {
+    figure.default-avatar, .avatar {
       width: 200px;
       padding: 5px 5px 5px 5px;
       cursor: pointer;
@@ -67,6 +67,43 @@ div.user-show {
       font-size: 14px;
       margin-bottom: 10px;
     }
+
+    div.send-messadge {
+      position: absolute;
+      width: 500px;
+      min-height: 350px;
+      background: rgba(63, 119, 181, 0.59);
+      border: 2px solid rgb(17, 28, 72);
+      margin-top: -240px;
+      border-radius: 10px;
+      display: none;
+
+      .messadge-create-body {
+        margin: 20px;
+        max-width: 445px;
+        width: 445px;
+        height: 260px;
+        background: rgba(255, 255, 255, 0.91);
+        border: 2px solid rgb(17, 28, 72);
+        padding: 5px;
+        font-size: 14px;
+        margin-bottom: 0px;
+      }
+
+      button {
+        width: 150px;
+        margin-left: 170px;
+        height: 30px;
+        border-radius: 35px;
+        background: rgba(11, 18, 76, 0.97);
+        border: 2px solid rgba(76, 175, 80, 0.77);
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 10px;
+        margin-top: -10px;
+      }
+    }
   }
 
   .profile-activity {
@@ -109,6 +146,11 @@ div.user-show {
         margin: 0px 10px 0px 10px;
         padding-left: 5px;
         padding-right: 5px;
+        padding-bottom: 10px;
+      }
+
+      #post_image {
+        margin-left: 10px;
       }
 
       button {
@@ -149,6 +191,14 @@ div.user-show {
       overflow: hidden;
       padding-top: 10px;
       padding-bottom: 10px;
+    }
+
+    iframe {
+      margin-left: 35px;
+    }
+
+    img {
+      cursor: pointer;
     }
 
     a.edit-post {
@@ -277,13 +327,75 @@ div.comment {
   }
 }
 
-div.show-image {
-  background: rgba(20, 21, 23, 0.31);
-  background-size: 100%;
-  width: 100vw;
-  height: 100vh;
-  margin-left: 1200px;
-  cursor: pointer;
-  position:absolute;
-  display: none;
+.puts-image {
+  float: left;
+  width: 250px;
+  border: 2px groove rgba(96, 125, 139, 0.15);
+  background: rgba(63, 81, 181, 0.11);
+  padding-bottom: 20px;
+
+  figure {
+    width: 200px;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+    border: 2px solid rgba(96, 125, 139, 0.75);
+
+    img {
+      width: 200px;
+    }
+
+  }
+}
+
+div.message-folder {
+  width: 800px;
+
+  .msg-block {
+    width: 750px;
+    margin-left: 25px;
+    min-height: 150px;
+    border: 2px solid rgba(96, 125, 139, 0.75);
+    background: rgba(139, 133, 96, 0.48);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    .msg-avatar img {
+      width: 120px;
+      height: 150px;
+      float: left;
+    }
+
+    .msg-content {
+      width: 630px;
+      margin-left: 140px;
+      margin-top: 10px;
+
+      a {
+        color: blue;
+        font-size: 18px;
+        text-decoration: none;
+        width: 200px;
+      }
+
+      p.msg-date {
+        float: right;
+        margin-right: 50px;
+        color: rgba(23, 19, 19, 0.67);
+        font-size: 15px;
+      }
+
+      p.msg-text {
+        margin-top: 15px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .msg-block:hover {
+    background: rgba(119, 113, 86, 0.78);
+    transition: 1s;
+  }
 }

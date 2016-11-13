@@ -1,9 +1,12 @@
 <div class="post-forms">
-  <%= form_for([@user, @post], remote: true) do |form| %>
+  <%= form_for([@user, @post]) do |form| %>
     <%= form.label :text, hidden: :true %>
     <%= form.text_area :text, class: "post-create-body",
                               placeholder: "Write your new post",
                               autofocus: "true" %> <br>
+    <%= form.label :image, hidden: :true %>
+    <%= form.file_field :image %>
+    <hr class="comment-margin">
     <%= button_tag(type: 'submit') do %>
       Send
     <% end %>

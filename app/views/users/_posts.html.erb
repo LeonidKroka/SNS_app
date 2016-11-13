@@ -4,20 +4,27 @@
       <p class="author"><%= link_to @user.name+' '+@user.surname, @user, method: :get %></p>
       <p class="date"><%= date_format post.created_at %></p>
       <hr class="line">
+      <% unless post.images.empty? %>
+      <img src=<%= post.images.last.image.post.url %> class="with" id=<%= @user.id %> >
+      <% end %>
+      <% unless (get_utube post.text).nil? %>
+        <iframe width="420" height="315" frameborder="0" allowfullscreen
+                src=<%= get_utube post.text %> ></iframe>
+      <% end %>
       <div class="post-content">
         <p class="post-text"><%= post.text %></p>
       </div>
-      <% if post_comments(@user, post).count == 0 %>
+      <% if post_comments(post).all.count == 0 %>
         <p class="to-comment" id=<%= "#{post.id}" %> >Comment</p>
       <% end %>
       <% if current_user == @user %>
         <%= link_to "Delete", user_post_path(@user, post), method: :delete, remote: true, class: "edit-post" %>
-        <%= link_to "Edit", edit_user_post_path(@user, post), remote: true, class: "edit-post" %>
+        <%#= link_to "Edit", edit_user_post_path(@user, post), remote: true, class: "edit-post" %>
       <% end %>
     </div>
 
     <div class="comments">
-      <% post_comments(@user, post).each do |comment| %>
+      <% post_comments(post).each do |comment| %>
         <div class="comment" id=<%= "comment-#{comment.id}" %> >
           <p class="author">
             <%= link_to (author comment).name+' '+(author comment).surname, (author comment),
@@ -29,7 +36,7 @@
           </div>
           <p class="date"><%= date_format comment.created_at %></p>
           <% if current_user == (author comment) %>
-            <%= link_to "Delete", user_comment_path(current_user, comment),
+            <%= link_to "Delete", user_comment_path(@user, comment),
                         method: :delete, remote: true, class: "edit-comment" %>
           <% end %>
         </div>
@@ -38,7 +45,7 @@
 
       <hr class="comment-hr">
 
-      <% unless (post_comments(@user, post).count == 0) %>
+      <% unless (post_comments(post).all.count == 0) %>
         <div class=<%= "to-create-comment-#{post.id}" %> >
           <button class="new-comment" id=<%= "#{post.id}" %> >Write your new comment</button>
         </div>

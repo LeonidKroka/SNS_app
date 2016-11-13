@@ -1,0 +1,61 @@
+div.show-all-images {
+  padding: 10px 10px 10px 10px;
+  width: 780px;
+  border: 1px groove rgba(96, 125, 139, 0.46);
+
+  .icon {
+    padding: 5px 5px 5px 5px;
+    margin: 0px 23px 15px 23px;
+    border: 2px groove rgba(139, 139, 96, 0.7);
+    width: 200px;
+    float: left;
+    cursor: pointer;
+
+    img {
+      width: 200px;
+      height: 300px;
+    }
+  }
+
+  .margin-bottom { clear: both; }
+}
+
+div.show-image {
+  background: rgba(20, 21, 23, 0.80);
+  border: 2px groove rgba(139, 139, 96, 0.7);
+  background-size: 100%;
+  width: 1314px;
+  height: 700px;
+  cursor: pointer;
+  position:absolute;
+  display: none;
+
+  div#img-view {
+    margin: auto;
+    width: 570px;
+    height: 610px;
+    background: rgba(20, 21, 23, 0.80);
+    border: 2px groove rgba(139, 139, 96, 0.9);
+    margin-top: 45px;
+
+    .left {
+      width: 570px;
+      float: left;
+    }
+
+    .large-image {
+      width: 500px;
+      height: 550px;
+      padding: 10px 10px 10px 10px;
+      border: 2px groove rgba(139, 139, 96, 0.9);
+      margin: auto;
+      margin-top: 20px;
+      cursor: auto;
+
+      img {
+        width: 500px;
+        height: 550px;
+      }
+    }
+  }
+}

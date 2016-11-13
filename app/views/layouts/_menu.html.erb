@@ -6,7 +6,10 @@
     <%= link_to user_messages_path(current_user), method: :get do %>
       <li>Messages</li>
     <% end %>
-    <%= link_to friends_path(current_user), method: :get do %>
+    <%= link_to user_posts_path(current_user), method: :get do %>
+      <li>News</li>
+    <% end %>
+    <%= link_to friends_user_path(current_user), method: :get do %>
       <li>Friends</li>
     <% end %>
     <%= link_to user_images_path(current_user), method: :get do %>
