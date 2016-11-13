@@ -19,12 +19,12 @@
 
       <% unless friend == current_user %>
 
-          <button class="friend-action send-letter">Send messadge</button>
-          <div class="send-messadge">
-            <%= form_for(:messadge, :url => user_messages_path(@user), method: :post, remote: true) do |form| %>
+          <button class="friend-action send-letter" id= <%=friend.id %>>Send message</button>
+          <div class="send-message" id=<%="send-message-#{friend.id}" %> >
+            <%= form_for(:message, :url => user_messages_path(@user), method: :post, remote: true) do |form| %>
               <%= form.label :text, hidden: :true %>
-              <%= form.text_area :text, class: "messadge-create-body",
-                                        placeholder: "Write your messadge",
+              <%= form.text_area :text, class: "message-create-body",
+                                        placeholder: "Write your message",
                                         autofocus: "true" %> <br>
               <hr class="comment-margin">
               <%= button_tag(type: 'submit') do %>
