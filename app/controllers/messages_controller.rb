@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :logged_for_action
+  
   def index
     @messages = Message.where('CAST(receiver_id AS text) LIKE ?', current_user.id.to_s).order('id DESC')
   end

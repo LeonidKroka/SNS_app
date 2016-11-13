@@ -1,6 +1,9 @@
 require 'uri'
 
 class PostsController < ApplicationController
+  before_action :logged_for_action, only: [:new, :create]
+  before_action :correct_user,   only: [:destroy]
+
   def create
     url = URI.extract(params[:post][:text])
     if url.map{|link| link.include?("utube")}.include?(false) && !(url.count==0)
@@ -66,5 +69,10 @@ class PostsController < ApplicationController
 
     def image_params
       params.require(:post).permit(:image)
+    end
+
+    def correct_user
+      post = Post.find_by(id: params[:id])
+      redirect_to root_path unless (current_user == User.find_by(id: post.user_id))
     end
 end

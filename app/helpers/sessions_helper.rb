@@ -25,6 +25,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def logged_for_action
+    (redirect_to root_path) if current_user.nil?
+  end
+
   def remember user
     user.remember
     cookies.permanent.signed[:user_id] = user.id

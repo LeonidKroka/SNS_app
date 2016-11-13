@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :logged_for_action, only: :destroy
   def new
   end
 
