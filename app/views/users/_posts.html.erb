@@ -1,7 +1,7 @@
 <div class="posts">
   <% @posts.each do |post| %>
     <div class="post" id=<%= "post-#{post.id}" %> >
-      <p class="author"><%= link_to @user.name+' '+@user.surname, @user, method: :get %></p>
+      <p class="author"><%= link_to @user.name+' '+@user.surname, @user, remote: true %></p>
       <p class="rating">
         <span class="like">
           <%= link_to '+', like_user_post_path(@user, post), method: :post, remote: true %>
@@ -38,7 +38,7 @@
         <div class="comment" id=<%= "comment-#{comment.id}" %> >
           <p class="author">
             <%= link_to (author comment).name+' '+(author comment).surname, (author comment),
-                        method: :get, class: 'author-link' %>
+                        remote: true, class: 'author-link' %>
           </p>
           <hr class="line">
           <div class="comment-content">

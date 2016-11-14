@@ -1,0 +1,4 @@
+$("<%= escape_javascript(render(partial: 'images/index', :locals => {:images => @images })) %>")
+.replaceAll("#app");
+
+$(document).ready(showImage);

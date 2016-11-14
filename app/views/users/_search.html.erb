@@ -1,0 +1,24 @@
+<% provide(:title, 'Search') %>
+<div id="app">
+  <div class="show-all-friends">
+    <h1>People</h1>
+    <hr>
+    <% @search.each do |friend| %>
+      <div class="one-friend">
+        <%= link_to friend, remote: true do %>
+          <% if (get_avatar friend).nil? %>
+            <figure class="avatar">
+              <p><img src="/assets/avatar.jpg"></p>
+            </figure>
+          <% else %>
+            <figure class="avatar">
+              <p><img src=<%= "#{get_avatar friend}" %> ></p>
+            </figure>
+          <% end %>
+        <% end %>
+        <%= link_to "#{friend.name+' '+friend.surname}", user_path(friend), remote: true %>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+</div>

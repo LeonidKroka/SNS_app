@@ -1,9 +1,7 @@
-<% provide(:title, 'Home') %>
-<div class="root-page">
-  <div class="root-content">
-  </div>
-  <div class="create-user">
-    <span class="click-to-create"> New user? </span>
-    <%= render '/users/create_form' %>
-  </div>
-</div>
+<%=
+  if logged?
+    render(partial: 'show', :locals => {:post => @post, :posts => @posts, :friends => @friends, :user => @user })
+  else
+    render 'new'
+  end 
+%>

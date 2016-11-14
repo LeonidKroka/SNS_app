@@ -1,0 +1,12 @@
+<% unless @profile == 'false' %>
+$("<%= escape_javascript(render(partial: 'users/show', :locals => {:post => @post, :posts => @posts, :friends => @friends, :user => @user })) %>")
+.replaceAll("#app");
+$(document).ready(createCommentAction);
+$(document).ready(toCreateCommentAction);
+$(document).ready(addHeightToProfile);
+$(document).ready(showImage);
+<% else %>
+$("<%= escape_javascript(render(partial: 'users/friends', :locals => {:friends => @friends, :user => @user })) %>")
+.replaceAll("#app");
+<% end %>
+$(document).ready(sendMessage);

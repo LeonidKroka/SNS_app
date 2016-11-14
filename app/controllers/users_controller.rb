@@ -4,7 +4,15 @@ class UsersController < ApplicationController
                                            :create_friend, :destroy_friend]
 
   def new
-    @user = User.new()
+    if logged?
+      @user = current_user
+      @friends = get_nine_friends @user
+      @post = Post.new
+      @comment = Comment.new
+      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    else
+      @user = User.new()
+    end
   end
 
   def create
@@ -13,9 +21,17 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       UserMailer.account_activation(@user).deliver_now
-      redirect_to @user
+      @friends = get_nine_friends @user
+      @post = Post.new
+      @comment = Comment.new
+      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+      @page = "profile"
     else
-      render 'new'
+      @page = "back"
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -25,31 +41,44 @@ class UsersController < ApplicationController
     @post = Post.new
     @comment = Comment.new
     @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
     @user = current_user
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
+    @user = current_user
     if User.new(validation_hash).valid?
-      @user = current_user
       @user.update_attribute(:name, params[:user][:name])
       @user.update_attribute(:surname, params[:user][:surname])
-      redirect_to @user
-    else
-      redirect_to(:back)
+    end
+    @friends = get_nine_friends @user
+    @post = Post.new
+    @comment = Comment.new
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    respond_to do |format|
+      format.js
     end
   end
 
   def edit_pass
     @user = current_user
-    if @user.authenticated?(:password, params[:user][:last_password])
-      @user.update_attributes(:password => params[:user][:password],
+    @user.authenticated?(:password, params[:user][:last_password])
+    @user.update_attributes(:password => params[:user][:password],
                               :password_confirmation => params[:user][:password_confirmation])
-      redirect_to @user
-    else
-      redirect_to(:back)
+    @friends = get_nine_friends @user
+    @post = Post.new
+    @comment = Comment.new
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -68,30 +97,50 @@ class UsersController < ApplicationController
                       (user.name.include?line)||
                       (user.name.include?line)
     end
-  end
-
-  def index
-    @search = User.all
-    render 'search'
+    respond_to do |format|
+      format.js
+    end
   end
 
   def friends
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: (params[:id]||current_user.id))
     @friends = @user.all_friends
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create_friend
     relation = FriendRelation.new(friend_relation_params)
     relation.friend_id = current_user.id
     relation.save
-    redirect_to(:back)
+    @user = User.find_by(id: params[:friend_relation][:user_id])
+    @friends = get_nine_friends @user
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @post = Post.new
+    @comment = Comment.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy_friend
-    user = User.find_by(id: params[:user][:user_id])
-    relation = current_user.all_relations.find_by(friend_id: user.id)||current_user.all_relations.find_by(user_id: user.id)
+    @user = User.find_by(id: params[:user][:user_id])
+    relation = (current_user.all_relations.find_by(friend_id: @user.id)||current_user.all_relations.find_by(user_id: @user.id))
     relation.destroy
-    redirect_to(:back)
+    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @post = Post.new
+    @comment = Comment.new
+    @profile = params[:user][:profile]
+    if @profile == 'false'
+      @friends = get_nine_friends current_user
+      @user = current_user
+    else
+      @friends = get_nine_friends @user
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

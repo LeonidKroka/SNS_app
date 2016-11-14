@@ -1,12 +1,12 @@
 <div class="header">
   <% if logged? %>
-    <%= link_to "Ant-eater", current_user, method: :get, id: "logo" %>
+    <%= link_to "Ant-eater", current_user, remote: true, id: "logo" %>
   <% else %>
     <%= link_to "Ant-eater", root_path, method: :get, id: "logo" %>
   <% end %>
 
   <% if logged? %>
-    <%= form_for User.new, :url => search_path do |form| %>
+    <%= form_for User.new, :url => search_path, remote: true do |form| %>
       <%= form.label :title, hidden: :true %>
       <%= form.text_field :name, class: "form-control", placeholder: "Search" %>
       <%= button_tag(type: 'submit', hidden: :true) do %>Search!<% end %>
@@ -23,7 +23,7 @@
           </p>
           <div class="dropdown-up"></div>
           <ul class="dropdown-menu">
-            <%= link_to edit_user_path(current_user), method: :get do %>
+            <%= link_to edit_user_path(current_user), remote: true do %>
               <li>Edit profile</li>
             <% end %>
             <%= link_to logout_path(current_user), method: :delete do %>

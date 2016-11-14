@@ -1,18 +1,18 @@
 <div class="main-menu">
   <ul>
-    <%= link_to current_user, method: :get do %>
+    <%= link_to current_user, remote: true do %>
       <li>Profile</li>
     <% end %>
-    <%= link_to user_messages_path(current_user), method: :get do %>
+    <%= link_to user_messages_path(current_user), remote: true do %>
       <li>Messages</li>
     <% end %>
-    <%= link_to user_posts_path(current_user), method: :get do %>
+    <%= link_to user_posts_path(current_user), remote: true do %>
       <li>News</li>
     <% end %>
-    <%= link_to friends_user_path(current_user), method: :get do %>
+    <%= link_to friends_user_path(current_user), remote: true do %>
       <li>Friends</li>
     <% end %>
-    <%= link_to user_images_path(current_user), method: :get do %>
+    <%= link_to user_images_path(current_user), remote: true do %>
       <li>Gallery</li>
     <% end %>
   </ul>

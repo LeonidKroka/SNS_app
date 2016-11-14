@@ -1,4 +1,6 @@
-$(document).ready(function() {
+$(document).ready(rootJSAction);
+
+function rootJSAction () {
   $(".dropdown").click(function() {
     $(this).css("border", "1px solid #ccc");
     $(this).css("background-color", "rgba(12, 85, 140, 0.3)");
@@ -33,4 +35,4 @@ $(document).ready(function() {
   $(".go-up").click(function() {
     $(window).scrollTop( 0 )
   })
-})
+}

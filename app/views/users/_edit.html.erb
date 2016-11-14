@@ -1,0 +1,33 @@
+<% provide(:title, 'Update') %>
+<div id="app">
+  <div class="user-edit-folder">
+    <div class="nav-name-content">
+      <h1>Chang your name</h1>
+      <%= form_for @user, remote: true do |form| %>
+        <%= form.label :name, hidden: :true %>
+        <%= form.text_field :name, placeholder: "Your name" %><br>
+        <%= form.label :surname, hidden: :true %>
+        <%= form.text_field :surname, placeholder: "Your surname" %><br>
+        <%= button_tag(type: 'submit', class: "btn btn-sm btn-warning") do %>
+          It's ok!
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="nav-pass-content">
+      <h1>Chang your password</h1>
+      <%= form_for(@user, url: edit_pass_path, method: :post, remote: true) do |form| %>
+        <%= form.label :last_password, hidden: :true %>
+        <%= form.password_field :last_password, placeholder: "Last password" %><br>
+
+        <%= form.label :password, hidden: :true %>
+        <%= form.password_field :password, placeholder: "New password" %><br>
+        <%= form.label :password_confirmation, hidden: :true %>
+        <%= form.password_field :password_confirmation, placeholder: "Confirm new password" %><br>
+        <%= button_tag(type: 'submit') do %>
+          It's ok!
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

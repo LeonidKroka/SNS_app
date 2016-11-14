@@ -3,4 +3,8 @@ $("<%= escape_javascript(render(partial: 'users/posts', :locals => {:post => @po
 $(".to-create-post").css("display", "block");
 $(".create-post").css("display", "none");
 $(".post-create-body").val('');
+$(document).ready(createPostAction);
+$(document).ready(createCommentAction);
+$(document).ready(toCreateCommentAction);
+$(document).ready(addHeightToProfile);
 $(document).ready(toCreateCommentAction);

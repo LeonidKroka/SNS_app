@@ -9,9 +9,6 @@ class PostsController < ApplicationController
     if url.map{|link| link.include?("utube")}.include?(false) && !(url.count==0)
       @user = current_user
       @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
-      @post = Post.new
-      @comment = Comment.new
-      redirect_to @user
     else
       @user = User.find_by(id: params[:user_id])
       @user.posts.create(post_params)
@@ -19,10 +16,10 @@ class PostsController < ApplicationController
       image.post_id = Post.last.id
       image.save
       @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
-      @post = Post.new
-      @comment = Comment.new
-      redirect_to @user
     end
+    @post = Post.new
+    @comment = Comment.new
+    redirect_to(:back)
   end
 
   def destroy
@@ -40,6 +37,9 @@ class PostsController < ApplicationController
     @posts = news.paginate(page: params[:page], per_page: 20).order('id DESC')
     @images = new_images.limit(11)
     @comment = Comment.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def like

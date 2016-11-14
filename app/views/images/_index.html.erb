@@ -1,0 +1,13 @@
+<% provide(:title, 'Gallery') %>
+<div id="app">
+  <div class="show-all-images">
+    <% @images.all.each do |img| %>
+      <div class="one-image">
+        <figure class="icon" >
+          <p><img src=<%= img.image.list.url %> class="with" id=<%= img.id %> ></p>
+        </figure>
+      </div>
+    <% end %>
+    <hr class="margin-bottom">
+  </div>
+</div>

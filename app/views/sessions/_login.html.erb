@@ -1,6 +1,6 @@
 <div class="login-form">
   <%= content_tag(:div, flash[:error], class: "alert-errors") %>
-  <%= form_for(:session, url: login_path) do |form| %>
+  <%= form_for(:session, url: login_path, remote: true) do |form| %>
     <%= form.label :email, hidden: :true %>
     <%= form.text_field :email, placeholder: "Email",
                                 tabindex: "1",
