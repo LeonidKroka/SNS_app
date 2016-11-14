@@ -1,4 +1,5 @@
 $(document).ready(showImage);
+$(document).ready(endleScroll);
 
 function showImage () {
   $(".with").click(function() {
@@ -14,4 +15,17 @@ function showImage () {
       $("<img src='' class='chang-img' >").appendTo($(".large-image"));
     }
   })
+}
+
+function endleScroll () {
+  $(window).scroll(function() {
+    if ($('.profile-static').length==1) {
+      if ($(document).height() - $(window).height() == $(window).scrollTop()) {
+      $.ajax({
+        type: "POST",
+        url: 'set',
+        data: {'user_id': String($('.user-show').attr('id')), 'post': $('.post').length}
+      })}
+    }
+  });
 }

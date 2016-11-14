@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get    'password_reset',      to: 'users#password_reset'
   post   'edit_pass',           to: 'users#edit_pass'
   post   'search',              to: 'users#search'
+  post   'set',                 to: 'posts#add_next'
   get    'search',              to: 'users#index'
   post   'add_friend',          to: 'users#create_friend'
   delete 'delete_friend',       to: 'users#destroy_friend'

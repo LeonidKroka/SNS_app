@@ -4,19 +4,28 @@ class PostsController < ApplicationController
   before_action :logged_for_action, only: [:new, :create]
   before_action :correct_user,   only: [:destroy]
 
+  def add_next
+    @user = User.find_by(id: params[:user_id].to_i)
+    @posts = @user.posts.last(10+params[:post].to_i).reverse
+    @post = Post.new
+    @comment = Comment.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     url = URI.extract(params[:post][:text])
     if url.map{|link| link.include?("utube")}.include?(false) && !(url.count==0)
       @user = current_user
-      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
     else
       @user = User.find_by(id: params[:user_id])
       @user.posts.create(post_params)
       image = @user.images.new(image_params)
       image.post_id = Post.last.id
       image.save
-      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
     end
+    @posts = @user.posts.last(10).reverse
     @post = Post.new
     @comment = Comment.new
     redirect_to(:back)
@@ -25,7 +34,7 @@ class PostsController < ApplicationController
   def destroy
     @user = User.find_by(id: params[:user_id])
     @user.posts.find_by(id: params[:id]).destroy
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     @comment = Comment.new
     @post = Post.new
     respond_to do |format|

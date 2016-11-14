@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       @friends = get_nine_friends @user
       @post = Post.new
       @comment = Comment.new
-      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+      @posts = @user.posts.last(10).reverse
     else
       @page = 'back'
       flash.now[:error] = 'Invalid login/password'

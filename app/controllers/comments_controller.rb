@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @user = User.find_by(id: params[:user_id])
     comment = current_user.comments.create(post_params)
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     @comment = Comment.new
     @post = Post.new
     respond_to do |format|
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     puts params.inspect
     @user = User.find_by(id: params[:user_id])
     current_user.comments.find_by(id: params[:id]).destroy
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     @comment = Comment.new
     @post = Post.new
     respond_to do |format|

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       @friends = get_nine_friends @user
       @post = Post.new
       @comment = Comment.new
-      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+      @posts = @user.posts.last(10).reverse
     else
       @user = User.new()
     end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       @friends = get_nine_friends @user
       @post = Post.new
       @comment = Comment.new
-      @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+      @posts = @user.posts.last(10).reverse
       @page = "profile"
     else
       @page = "back"
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     @friends = get_nine_friends @user
     @post = Post.new
     @comment = Comment.new
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     respond_to do |format|
       format.js
     end
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @friends = get_nine_friends @user
     @post = Post.new
     @comment = Comment.new
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     respond_to do |format|
       format.js
     end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     @friends = get_nine_friends @user
     @post = Post.new
     @comment = Comment.new
-    @posts = @user.posts.paginate(page: params[:page], per_page: 10).order('id DESC')
+    @posts = @user.posts.last(10).reverse
     respond_to do |format|
       format.js
     end
